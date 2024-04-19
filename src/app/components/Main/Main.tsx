@@ -6,8 +6,6 @@ import HexagonRow from './HexagonRow';
 import { HexField } from '@/app/models/HexField';
 import { HexType, getColorByHexType, getImageByHexType } from '@/app/models/HexType';
 import desertImage from "../../../../public/desert.svg"
-import Image from 'next/image';
-import HexagonHex from './HexagonHex';
 
 function shuffle(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -20,33 +18,27 @@ function shuffle(array: any[]) {
 export default function Main() {
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.CLASSIC);
     const [fieldList, setFieldList] = useState<HexField[][]>([]);
-
     const handleGameModeChange = (mode: GameMode) => {
         setGameMode(mode);
     };
 
-
     const handleSubmitMapGenerator = () => {
-
         const hexTypesArray = Object.entries(hexTypePerGameMode[gameMode]).flatMap(([hexType, count]) =>
             Array.from({ length: count }, () => hexType)
         );
-
         const numbersArray = [...numbersPoolPerGameMode[gameMode]];
 
         let readyHexTypes = shuffle(hexTypesArray);
         let readyNumbers = shuffle(numbersArray);
-
         let tempFieldList: HexField[] = [];
 
         for (let i = readyHexTypes.length - 1; i >= 0; i--) {
-            const item: HexType = readyHexTypes.pop();
 
+            const item: HexType = readyHexTypes.pop();
             let image = getImageByHexType(item);
             let color = getColorByHexType(item)
 
             if (item === HexType.DESERT || item === HexType.WATER) {
-
                 tempFieldList.push({
                     image: image !== undefined ? image : desertImage,
                     color: color !== undefined ? color : 'bg-amber-300',
@@ -78,12 +70,11 @@ export default function Main() {
             result.push(slice);
             position += size;
         }
-
         return result;
     }
 
     return (
-        <>
+        <div className='mx-auto'>
             <div className="dropdown dropdown-bottom">
                 <div tabIndex={0} role="button" className="btn m-1">{gameMode == "CLASSIC" ? "Classic" : "Seafarer"}</div>
                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -101,11 +92,11 @@ export default function Main() {
                 </ul>
             </div>
             <button className="btn btn-primary" onClick={() => handleSubmitMapGenerator()}>Generate Map</button>
-            <div className="flex flex-col p-4 hexagon-grid">
+            <div className="flex flex-col">
                 {fieldList.map((item, index) => (
                     <HexagonRow key={index} fields={item} />
                 ))}
             </div>
-        </>
+        </div>
     );
 }

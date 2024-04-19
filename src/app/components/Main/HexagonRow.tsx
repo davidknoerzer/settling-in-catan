@@ -6,7 +6,7 @@ interface HexagonRowProps {
 }
 export default function HexagonRow({ fields }: HexagonRowProps) {
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center -m-3">
             {fields.map((field, index) => (
                 <HexagonHex key={index} {...field} />
             ))}
