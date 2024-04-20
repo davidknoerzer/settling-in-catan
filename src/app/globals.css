@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .hexagon-grid div {
-    margin: -7px;
+.text-xxs {
+    font-size: 0.5rem;
+    line-height: 0.75rem;
 }
-
-.hexagon-grid img {
-    margin: -5px;
-} */

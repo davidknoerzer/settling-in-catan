@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { GameMode, hexPerRowPerGame, hexTypePerGameMode, numbersPoolPerGameMode } from "@/app/models/GameMode";
 import HexagonRow from './HexagonRow';
 import { HexField } from '@/app/models/HexField';
@@ -74,29 +74,30 @@ export default function Main() {
     }
 
     return (
-        <div className='mx-auto'>
-            <div className="dropdown dropdown-bottom">
-                <div tabIndex={0} role="button" className="btn m-1">{gameMode == "CLASSIC" ? "Classic" : "Seafarer"}</div>
-                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-
-                    <li key={GameMode.CLASSIC}>
-                        <a onClick={() => handleGameModeChange(GameMode.CLASSIC)}>
-                            {GameMode.CLASSIC}
-                        </a>
-                    </li>
-                    <li key={GameMode.SEAFARER}>
-                        <a onClick={() => handleGameModeChange(GameMode.SEAFARER)}>
-                            {GameMode.SEAFARER}
-                        </a>
-                    </li>
-                </ul>
+        <>
+            <div className='container mx-auto'>
+                <div className="dropdown dropdown-bottom">
+                    <div tabIndex={0} role="button" className="btn m-1">{gameMode == "CLASSIC" ? "Classic" : "Seafarer"}</div>
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li key={GameMode.CLASSIC}>
+                            <a onClick={() => handleGameModeChange(GameMode.CLASSIC)}>
+                                {GameMode.CLASSIC}
+                            </a>
+                        </li>
+                        <li key={GameMode.SEAFARER}>
+                            <a onClick={() => handleGameModeChange(GameMode.SEAFARER)}>
+                                {GameMode.SEAFARER}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button className="btn btn-primary" onClick={() => handleSubmitMapGenerator()}>Generate Map</button>
             </div>
-            <button className="btn btn-primary" onClick={() => handleSubmitMapGenerator()}>Generate Map</button>
             <div className="flex flex-col">
                 {fieldList.map((item, index) => (
                     <HexagonRow key={index} fields={item} />
                 ))}
             </div>
-        </div>
+        </>
     );
 }
