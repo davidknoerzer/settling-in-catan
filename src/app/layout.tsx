@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 

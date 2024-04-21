@@ -5,16 +5,18 @@ import sheepImage from "../../../public/sheep.svg"
 import waterImage from "../../../public/water.svg"
 import wheatImage from "../../../public/wheat.svg"
 import woodImage from "../../../public/wood.svg"
+import fishImage from "../../../public/fish.svg"
 import { StaticImageData } from "next/image"
 
 export enum HexType {
-    BRICK = "BRICK",
-    DESERT = "DESERT",
-    ORE = "ORE",
-    SHEEP = "SHEEP",
-    WATER = "WATER",
-    WHEAT = "WHEAT",
-    WOOD = "WOOD"
+    BRICK = "Brick",
+    DESERT = "Desert",
+    ORE = "Ore",
+    SHEEP = "Sheep",
+    WATER = "Water",
+    WHEAT = "Wheat",
+    WOOD = "Wood",
+    FISH = "Fish",
 }
 
 type HexTypeColorPair = {
@@ -33,7 +35,8 @@ export const hexTypeColors: HexTypeColorPair[] = [
     { hexType: HexType.SHEEP, color: 'bg-green-500' },
     { hexType: HexType.WATER, color: 'bg-blue-400' },
     { hexType: HexType.WHEAT, color: 'bg-yellow-500' },
-    { hexType: HexType.WOOD, color: 'bg-green-900' }
+    { hexType: HexType.WOOD, color: 'bg-green-900' },
+    { hexType: HexType.FISH, color: 'bg-blue-700' },
 ];
 
 export const hexTypeImages: HexTypeImagePair[] = [
@@ -43,7 +46,8 @@ export const hexTypeImages: HexTypeImagePair[] = [
     { hexType: HexType.SHEEP, image: sheepImage },
     { hexType: HexType.WATER, image: waterImage },
     { hexType: HexType.WHEAT, image: wheatImage },
-    { hexType: HexType.WOOD, image: woodImage }
+    { hexType: HexType.WOOD, image: woodImage },
+    { hexType: HexType.FISH, image: fishImage },
 ];
 
 export function getColorByHexType(hexType: HexType): string | undefined {
