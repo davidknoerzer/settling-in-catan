@@ -3,11 +3,6 @@ interface InfoProps {
     mode: GameMode;
 }
 export default function Info({mode}: InfoProps){
-
-    // Object.entries(hexTypePerGameMode[mode]).map(item => {
-    //     <p className="py-4">item[0]+": "+item[1]</p>
-    //   })
-
     return(
 <dialog id="info_modal" className="modal">
     <div className="modal-box">
