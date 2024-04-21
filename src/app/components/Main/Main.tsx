@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   GameMode,
   hexPerRowPerGame,
@@ -27,9 +27,10 @@ function shuffle(array: any[]) {
 export default function Main() {
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.CLASSIC);
   const [fieldList, setFieldList] = useState<HexField[][]>([]);
-  const handleGameModeChange = (mode: GameMode) => {
-    setGameMode(mode);
-  };
+
+  useEffect(() => {
+    handleSubmitMapGenerator();
+  }, [gameMode]);
 
   const handleSubmitMapGenerator = () => {
     const hexTypesArray = Object.entries(hexTypePerGameMode[gameMode]).flatMap(
@@ -65,7 +66,6 @@ export default function Main() {
         }
       }
     }
-
     setFieldList(
       splitArrayByPattern(tempFieldList, hexPerRowPerGame[gameMode])
     );
@@ -85,37 +85,65 @@ export default function Main() {
 
   return (
     <>
-      <div className="container mx-auto">
-        <div className="dropdown dropdown-bottom">
-          <div tabIndex={0} role="button" className="btn m-1">
-            {gameMode == "CLASSIC" ? "Classic" : "Seafarer"}
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li key={GameMode.CLASSIC}>
-              <a onClick={() => handleGameModeChange(GameMode.CLASSIC)}>
-                {GameMode.CLASSIC}
-              </a>
-            </li>
-            <li key={GameMode.SEAFARER}>
-              <a onClick={() => handleGameModeChange(GameMode.SEAFARER)}>
-                {GameMode.SEAFARER}
-              </a>
-            </li>
-          </ul>
+      <div className="navbar bg-base-100">
+        <div className="navbar-start">
+          <h1 className="text-3xl">Settling in Catan</h1>
         </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => handleSubmitMapGenerator()}
-        >
-          Generate Map
-        </button>
+        <div className="navbar-end">
+          <div className="dropdown dropdown-bottom">
+            <div tabIndex={0} role="button" className="btn m-1">
+              {gameMode}
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li key={GameMode.CLASSIC}>
+                <a
+                  onClick={() => {
+                    setGameMode(GameMode.CLASSIC);
+                  }}
+                >
+                  {GameMode.CLASSIC}
+                </a>
+              </li>
+              <li key={GameMode.SEAFARER}>
+                <a
+                  onClick={() => {
+                    setGameMode(GameMode.SEAFARER);
+                  }}
+                >
+                  {GameMode.SEAFARER}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <button
+            className="btn btn-circle"
+            onClick={() => handleSubmitMapGenerator()}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                id="Vector"
+                d="M13.9998 8H18.9998V3M18.7091 16.3569C17.7772 17.7918 16.4099 18.8902 14.8079 19.4907C13.2059 20.0913 11.4534 20.1624 9.80791 19.6937C8.16246 19.225 6.71091 18.2413 5.66582 16.8867C4.62073 15.5321 4.03759 13.878 4.00176 12.1675C3.96593 10.4569 4.47903 8.78001 5.46648 7.38281C6.45392 5.98561 7.86334 4.942 9.48772 4.40479C11.1121 3.86757 12.8661 3.86499 14.4919 4.39795C16.1177 4.93091 17.5298 5.97095 18.5209 7.36556"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
       <div className="flex flex-col pt-5">
         {fieldList.map((item, index) => (
-          <HexagonRow key={index} fields={item} />
+          <HexagonRow key={index} fields={item} mode={gameMode} />
         ))}
       </div>
     </>
