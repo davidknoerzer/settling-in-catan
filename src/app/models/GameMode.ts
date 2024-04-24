@@ -4,7 +4,7 @@ export enum GameMode {
   CLASSIC = "Classic",
   SEAFARER = "Seafarer",
   SEAFARER_FISH = "Fishies",
-  LARGE = "Large"
+  LARGE = "Large",
 }
 
 export const numbersPoolPerGameMode = {
@@ -20,8 +20,8 @@ export const numbersPoolPerGameMode = {
     10, 10, 11, 11, 11, 12,
   ],
   [GameMode.LARGE]: [
-    2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10,
-    10, 10, 11, 11, 11, 12,
+    2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 8, 8, 8, 8, 9, 9, 9, 9,
+    9, 10, 10, 10, 10, 11, 11, 11, 12,
   ],
 };
 export const hexTypePerGameMode = {

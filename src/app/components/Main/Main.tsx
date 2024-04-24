@@ -48,7 +48,11 @@ export default function Main() {
       let image = getImageByHexType(item);
       let color = getColorByHexType(item);
 
-      if (item === HexType.DESERT || item === HexType.WATER || item === HexType.FISH) {
+      if (
+        item === HexType.DESERT ||
+        item === HexType.WATER ||
+        item === HexType.FISH
+      ) {
         tempFieldList.push({
           image: image !== undefined ? image : desertImage,
           color: color !== undefined ? color : "bg-amber-300",
@@ -85,29 +89,67 @@ export default function Main() {
   }
 
   return (
-    <>
+    <div className="container mx-auto">
       <Info mode={gameMode}></Info>
-      <div className="navbar bg-base-100">
+      <div className="navbar">
         <div className="navbar-start">
           <h1 className="text-3xl p-1">Settling in Catan</h1>
-          <button className="btn btn-circle" onClick={() => {
-            const modal = document.getElementById('info_modal') as HTMLDialogElement;
-            if (modal) {
-              modal.showModal();
-            }
-          }} title="Info">          <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-            <path d="M12 17V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            <circle cx="1" cy="1" r="1" transform="matrix(1 0 0 -1 11 9)" fill="currentColor"/>
-          </svg>
+          <button
+            className="btn btn-circle"
+            onClick={() => {
+              const modal = document.getElementById(
+                "info_modal"
+              ) as HTMLDialogElement;
+              if (modal) {
+                modal.showModal();
+              }
+            }}
+            title="Info"
+          >
+            <svg
+              className="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M12 17V11"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle
+                cx="1"
+                cy="1"
+                r="1"
+                transform="matrix(1 0 0 -1 11 9)"
+                fill="currentColor"
+              />
+            </svg>
           </button>
         </div>
         <div className="navbar-end">
           <div className="dropdown dropdown-bottom">
             <div tabIndex={0} role="button" className="btn m-1">
               {gameMode}
-              <svg className="h-6 w-6" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" fill="currentColor" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z"/>
+              <svg
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  fill="currentColor"
+                  d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z"
+                />
               </svg>
             </div>
             <ul
@@ -116,9 +158,7 @@ export default function Main() {
             >
               {Object.values(GameMode).map((mode) => (
                 <li key={mode}>
-                  <a onClick={() => setGameMode(mode)}>
-                    {mode}
-                  </a>
+                  <a onClick={() => setGameMode(mode)}>{mode}</a>
                 </li>
               ))}
             </ul>
@@ -152,6 +192,6 @@ export default function Main() {
           <HexagonRow key={index} fields={item} mode={gameMode} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
