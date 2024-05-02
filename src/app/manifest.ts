@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Settling in Catan",
     short_name: "Settle Catan",
     description: "Generate Maps for the Game Settlers of Catan",
-    start_url: "/",
+    start_url: "/settling-in-catan/",
     display: "standalone",
     background_color: "#22C55E",
     theme_color: "#fff",
