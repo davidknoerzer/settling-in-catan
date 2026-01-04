@@ -1,20 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import {
   GameMode,
   hexPerRowPerGame,
   hexTypePerGameMode,
   numbersPoolPerGameMode,
 } from "@/app/models/GameMode";
-import HexagonRow from "./HexagonRow";
 import { HexField } from "@/app/models/HexField";
 import {
   HexType,
   getColorByHexType,
   getImageByHexType,
 } from "@/app/models/HexType";
+import { useEffect, useState } from "react";
 import desertImage from "../../../../public/desert.svg";
+import HexagonRow from "./HexagonRow";
 
 function shuffle(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -84,8 +84,8 @@ export default function Main() {
   }
 
   return (
-    <>
-      <div className="navbar bg-base-100">
+    <div className="flex flex-col max-h-screen bg-base-100">
+      <div className="navbar">
         <div className="navbar-start">
           <h1 className="text-3xl">Settling in Catan</h1>
         </div>
@@ -133,7 +133,7 @@ export default function Main() {
                 id="Vector"
                 d="M13.9998 8H18.9998V3M18.7091 16.3569C17.7772 17.7918 16.4099 18.8902 14.8079 19.4907C13.2059 20.0913 11.4534 20.1624 9.80791 19.6937C8.16246 19.225 6.71091 18.2413 5.66582 16.8867C4.62073 15.5321 4.03759 13.878 4.00176 12.1675C3.96593 10.4569 4.47903 8.78001 5.46648 7.38281C6.45392 5.98561 7.86334 4.942 9.48772 4.40479C11.1121 3.86757 12.8661 3.86499 14.4919 4.39795C16.1177 4.93091 17.5298 5.97095 18.5209 7.36556"
                 stroke="#000000"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
@@ -141,11 +141,16 @@ export default function Main() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col pt-5">
+      <div className="flex flex-col w-full max-w-full ">
         {fieldList.map((item, index) => (
-          <HexagonRow key={index} fields={item} mode={gameMode} />
+          <div
+            key={index}
+            className={index > 0 ? "-mt-4 sm:-mt-8 lg:-mt-10" : ""}
+          >
+            <HexagonRow fields={item} mode={gameMode} />
+          </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

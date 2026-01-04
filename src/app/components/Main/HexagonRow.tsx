@@ -1,6 +1,6 @@
+import { GameMode } from "@/app/models/GameMode";
 import { HexField } from "@/app/models/HexField";
 import HexagonHex from "./HexagonHex";
-import { GameMode } from "@/app/models/GameMode";
 
 interface HexagonRowProps {
   fields: HexField[];
@@ -8,7 +8,7 @@ interface HexagonRowProps {
 }
 export default function HexagonRow({ fields, mode }: HexagonRowProps) {
   return (
-    <div className="flex justify-center -my-2 sm:-my-3.5 md:-my-4 lg:-my-5">
+    <div className="flex flex-row w-full justify-center ">
       {fields.map((item, index) => (
         <HexagonHex key={index} hexField={item} mode={mode} />
       ))}
