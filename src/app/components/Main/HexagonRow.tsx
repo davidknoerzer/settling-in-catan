@@ -8,7 +8,7 @@ interface HexagonRowProps {
 }
 export default function HexagonRow({ fields, mode }: HexagonRowProps) {
   return (
-    <div className="flex flex-row w-full justify-center ">
+    <div className="flex flex-row w-full justify-center gap-1 lg:gap-2">
       {fields.map((item, index) => (
         <HexagonHex key={index} hexField={item} mode={mode} />
       ))}
