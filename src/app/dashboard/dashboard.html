@@ -1,0 +1,65 @@
+<div class="flex flex-col min-h-screen bg-base-100">
+  <header
+    class="flex flex-row justify-between navbar bg-base-200 shadow-md gap-4"
+  >
+    <h1 class="text-xl font-bold text-primary">Settling in Catan</h1>
+    <div class="flex gap-2">
+      <button
+        (click)="generateNewMap()"
+        class="btn btn-ghost btn-circle text-secondary"
+        aria-label="Reload Map"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-rotate-cw"
+        >
+          <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+          <path d="M21 3v5h-5" />
+        </svg>
+      </button>
+
+      <div class="dropdown dropdown-end">
+        <div
+          tabindex="0"
+          role="button"
+          class="btn btn-ghost btn-outline text-secondary gap-2"
+        >
+          {{ selectedMode() === GameType.ORIGINAL ? 'Original' : 'Extension' }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </div>
+        <ul
+          tabindex="0"
+          class="dropdown-content z-1 menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          @for (option of mapOptions(); track option.id) {
+          <li><a (click)="setMap(option.id)">{{ option.label }}</a></li>
+          }
+        </ul>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 flex items-center justify-center p-4">
+    <app-catan-map [tiles]="tiles()" [rows]="rows()" />
+  </main>
+</div>

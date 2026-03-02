@@ -1,0 +1,31 @@
+<div class="flex flex-col items-center">
+  @for (rowCount of rows(); track rowIndex; let rowIndex = $index) {
+  <div class="flex justify-center -mt-2 sm:-mt-4 md:-mt-4 first:mt-0">
+    @for (tile of getTilesForRow(rowIndex); track $index) {
+    <div
+      class="mask mask-hexagon aspect-square w-16 sm:w-24 md:w-32 transition-all duration-300 flex flex-col gap-0.5 md:gap-1 p-2 items-center justify-center"
+      [class]="getResourceColor(tile.resource)"
+    >
+      <lucide-icon
+        [name]="icons[tile.resource]"
+        class="h-6 w-6 sm:h-12 sm:w-12 md:h-16 md:w-16"
+        color="#000"
+      />
+      @if (tile.resource !== 'desert') {
+      <div
+        class="w-6 sm:w-8 md:w-10 aspect-square bg-white rounded-full shadow-xl flex items-center justify-center"
+      >
+        <span
+          class="text-sm sm:text-base md:text-lg font-black leading-none"
+          [class.text-red-600]="tile.number === 6 || tile.number === 8"
+          [class.text-slate-900]="tile.number !== 6 && tile.number !== 8"
+        >
+          {{ tile.number }}
+        </span>
+      </div>
+      }
+    </div>
+    }
+  </div>
+  }
+</div>
